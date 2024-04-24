@@ -7,6 +7,7 @@ const cors  = require('cors')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const userRoutes = require('./src/routes/UserAPI.js')
+const bookRoutes = require('./src/routes/BooksAPI.js')
 
 //Security modules
 app.use(helmet())
@@ -16,8 +17,10 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-//Database connection
-mongoose.connect('mongodb+srv://pathshalaU:pathshalaU@cluster0.z2dcyfe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+// Database connection
+// const mongoString = 'mongodb+srv://pathshalaU:pathshalaU@cluster0.z2dcyfe.mongodb.net/PathshalaWeb?retryWrites=true&w=majority&appName=Cluster0';
+const mongoString = 'mongodb://localhost:27017/pathshalaWeb';
+mongoose.connect(mongoString)
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -26,14 +29,10 @@ mongoose.connect('mongodb+srv://pathshalaU:pathshalaU@cluster0.z2dcyfe.mongodb.n
   });
 
 
-// mongoose.connect('mongodb+srv://minbarapps:minbarapps@todo.jveh43o.mongodb.net/todo').then(()=>{
-//     console.log('Connected to MongoDB');
-// })
+// Book API Route
+app.use('/api', bookRoutes)
 
-//API Route
-// app.use('/api', routes)
-
-//User Routes
+//User API Routes
 app.use('/user', userRoutes)
 
 

@@ -12,11 +12,20 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
-        minlength: 6,
-        maxlength: 12,
+        required: true
+    },
+    opt: {
+        type: Number
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    isActive: {
+        type: Boolean,
+        default: true
     }
 });
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('users', UserSchema);
 module.exports = UserModel;
