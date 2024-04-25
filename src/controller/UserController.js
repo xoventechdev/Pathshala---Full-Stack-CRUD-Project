@@ -172,9 +172,23 @@ exports.ReadUsers = async (req, res) => {
 exports.ReadUser = async (req, res) => {
     try {
         const {id} = req.params;
-        const user = await UserModel.findById(id);
+        const user = await UserModel.findById({_id:id});
         res.json({status:'success', response: user});
     } catch (error) {
+        res.json({status:'error', response: error.message});
+    }
+}
+
+
+exports.DeleteUser = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const deleteUser = await UserModel.deleteOne({_id:id})
+        if(!deleteUser){
+            return res.json({status: 'warning', response: 'User delete failed. Try again later'})
+        }
+        return res.json({status: 'success', response: 'User deleted successfully'})
+    }catch {
         res.json({status:'error', response: error.message});
     }
 }

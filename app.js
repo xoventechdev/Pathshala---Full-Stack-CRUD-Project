@@ -35,7 +35,7 @@ app.use('/api', bookRoutes)
 //User API Routes
 app.use('/user', userRoutes)
 
-
+//three type of roles : admin = 0, moderator = 1, user = 2
 
 //Connect to Frontend
 app.use(express.static('client/dist'))

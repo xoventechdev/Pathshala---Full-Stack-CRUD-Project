@@ -17,9 +17,9 @@ const UserSchema = new mongoose.Schema({
     opt: {
         type: Number
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
+    roles: {
+        type: Number,
+        default: 2
     },
     isActive: {
         type: Boolean,
