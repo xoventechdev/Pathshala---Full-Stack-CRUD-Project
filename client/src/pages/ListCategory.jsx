@@ -1,11 +1,22 @@
-import React from 'react';
+import CategoryList from "../components/CategoryList";
+import MasterLayout from "../components/MasterLayout";
+import React from "react";
 
 const ListCategory = () => {
-    return (
-        <div>
-            <h2>List Category</h2>
+  return (
+    <MasterLayout>
+      <div className="col-12 px-0">
+        <div className="m-5">
+          <h2 className="text-black">Category List</h2>
+          <div className="mt-4">
+            <div className="row">
+              <CategoryList />
+            </div>
+          </div>
         </div>
-    );
+      </div>
+    </MasterLayout>
+  );
 };
 
 export default ListCategory;

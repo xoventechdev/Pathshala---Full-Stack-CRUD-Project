@@ -15,6 +15,8 @@ import 'bootstrap/dist/js/bootstrap.js'
 import 'react-toastify/dist/ReactToastify.css';
 import './assets/css/sb-admin-2.min.css'
 
+import 'bootstrap-icons/font/bootstrap-icons.min.css'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
