@@ -44,7 +44,7 @@ const SideBar = () => {
 
       <li className="nav-item active">
         <Link className="nav-link" to="/">
-          <i className="fas fa-fw fa-tachometer-alt"></i>
+          <i className="bi bi-menu-button-wide-fill"></i>
           <span>Dashboard</span>
         </Link>
       </li>
@@ -60,8 +60,7 @@ const SideBar = () => {
           onClick={toggleBooksCollapse}
           aria-expanded={isBooksCollapsed ? "true" : "false"}
         >
-          <i className="fas fa-fw fa-cog"></i>
-          <i className="bi bi-book-fill"></i>
+          <i className="bi bi-book-fill m-1"></i>
           <span>Book</span>
         </a>
         <div
@@ -70,7 +69,7 @@ const SideBar = () => {
           aria-labelledby="headingBooks"
         >
           <div className="bg-white py-2 collapse-inner rounded">
-            <Link className="collapse-item" to="/list-book">
+            <Link className="collapse-item" to="/view-book">
               View Book
             </Link>
             <Link className="collapse-item" to="/add-book">
@@ -87,8 +86,7 @@ const SideBar = () => {
           onClick={toggleAuthorCollapse}
           aria-expanded={isAuthorCollapsed ? "true" : "false"}
         >
-          <i className="fas fa-fw fa-cog"></i>
-          <i className="bi bi-pencil-square"></i>
+          <i className="bi bi-pencil-square m-1"></i>
           <span>Author</span>
         </a>
         <div
@@ -97,7 +95,7 @@ const SideBar = () => {
           aria-labelledby="headingAuthor"
         >
           <div className="bg-white py-2 collapse-inner rounded">
-            <Link className="collapse-item" to="/list-author">
+            <Link className="collapse-item" to="/view-author">
               View Author
             </Link>
             <Link className="collapse-item" to="/add-author">
@@ -116,8 +114,7 @@ const SideBar = () => {
           onClick={toggleCategoryCollapse}
           aria-expanded={isCategoryCollapsed ? "true" : "false"}
         >
-          <i className="fas fa-fw fa-cog"></i>
-          <i className="bi bi-bookmark"></i>
+          <i className="bi bi-bookmark m-1"></i>
           <span>Category</span>
         </a>
         <div
@@ -126,7 +123,7 @@ const SideBar = () => {
           aria-labelledby="headingCategory"
         >
           <div className="bg-white py-2 collapse-inner rounded">
-            <Link className="collapse-item" to="/list-category">
+            <Link className="collapse-item" to="/view-category">
               View Category
             </Link>
             <Link className="collapse-item" to="/add-category">
@@ -143,8 +140,7 @@ const SideBar = () => {
           onClick={toggleUserCollapse}
           aria-expanded={isUserCollapsed ? "true" : "false"}
         >
-          <i className="fas fa-fw fa-cog"></i>
-          <i className="bi bi-person-circle"></i>
+          <i className="bi bi-person-circle m-1"></i>
           <span>User</span>
         </a>
         <div
@@ -153,7 +149,7 @@ const SideBar = () => {
           aria-labelledby="headingUser"
         >
           <div className="bg-white py-2 collapse-inner rounded">
-            <Link className="collapse-item" to="/list-user">
+            <Link className="collapse-item" to="/view-user">
               View User
             </Link>
             <Link className="collapse-item" to="/add-user">
@@ -167,16 +163,14 @@ const SideBar = () => {
 
       <li className="nav-item">
         <a className="nav-link" href="tables.html">
-          <i className="fas fa-fw fa-table"></i>
-          <i className="bi bi-person-lines-fill"></i>
+          <i className="bi bi-person-lines-fill m-1"></i>
           <span>User Request</span>
         </a>
       </li>
 
       <li className="nav-item">
         <a className="nav-link" href="tables.html">
-          <i className="bi bi-gear-fill"></i>
-          <i className="fas fa-fw fa-table"></i>
+          <i className="bi bi-gear-fill m-1"></i>
           <span>Setting</span>
         </a>
       </li>

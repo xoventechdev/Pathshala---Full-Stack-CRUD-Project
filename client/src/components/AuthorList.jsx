@@ -5,23 +5,25 @@ import { DeleteAPI } from "../Utility/Helper";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-const CategoryList = ({ searchTerm }) => {
-  const [catInfo, setCatInfo] = useState([]);
+const AuthorList = ({ searchTerm }) => {
+  const [authorInfo, setAuthorInfo] = useState([]);
   const [itemChanged, setItemChanged] = useState(false);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/read-category")
+      .get("http://localhost:3000/api/read-author")
       .then((res) => {
-        setCatInfo(res.data.response);
+        setAuthorInfo(res.data.response);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [itemChanged]);
 
-  const filteredCategories = catInfo.filter((category) =>
-    category.title.toLowerCase().includes(searchTerm.toLowerCase())
+  console.log(authorInfo);
+
+  const filteredAuthor = authorInfo.filter((author) =>
+    author.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const deleteItem = (id) => {
@@ -36,7 +38,7 @@ const CategoryList = ({ searchTerm }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await DeleteAPI("category", id);
+          const response = await DeleteAPI("author", id);
           console.log(response);
           if (response.status == "success") {
             Swal.fire("Deleted!", response.response, "success");
@@ -60,7 +62,7 @@ const CategoryList = ({ searchTerm }) => {
           <thead>
             <tr>
               <th scope="col">No.</th>
-              <th scope="col">Title</th>
+              <th scope="col">Name</th>
               <th scope="col">Image</th>
               <th scope="col">isActive</th>
               <th scope="col">Total Books</th>
@@ -68,12 +70,12 @@ const CategoryList = ({ searchTerm }) => {
             </tr>
           </thead>
           <tbody>
-            {filteredCategories.length > 0 ? (
-              filteredCategories.map((item, index) => {
+            {filteredAuthor.length > 0 ? (
+              filteredAuthor.map((item, index) => {
                 return (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{item.title}</td>
+                    <td>{item.name}</td>
                     <td>
                       <img height={60} src={item.image} alt={item.title} />
                     </td>
@@ -81,7 +83,7 @@ const CategoryList = ({ searchTerm }) => {
                     <td>{item.totalBooks}</td>
                     <td>
                       <Link
-                        to={"/update-category/" + item._id}
+                        to={"/update-author/" + item._id}
                         className="btn btn-success m-1"
                       >
                         Edit
@@ -110,4 +112,4 @@ const CategoryList = ({ searchTerm }) => {
   );
 };
 
-export default CategoryList;
+export default AuthorList;

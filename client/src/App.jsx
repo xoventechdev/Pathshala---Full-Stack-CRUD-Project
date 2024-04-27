@@ -30,16 +30,16 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route index element={<HomePage />} />
-        <Route path="list-book" element={<ListBook />} />
+        <Route path="view-book" element={<ListBook />} />
         <Route path="add-book" element={<AddBook />} />
         <Route path="update-book" element={<UpdateBook />} />
-        <Route path="list-category" element={<ListCategory />} />
+        <Route path="view-category" element={<ListCategory />} />
         <Route path="add-category" element={<AddCategory />} />
         <Route path="update-category/:id" element={<UpdateCategory />} />
-        <Route path="list-author" element={<ListAuthor />} />
+        <Route path="view-author" element={<ListAuthor />} />
         <Route path="add-author" element={<AddAuthor />} />
-        <Route path="update-author" element={<UpdateAuthor />} />
-        <Route path="list-user" element={<ListUser />} />
+        <Route path="update-author/:id" element={<UpdateAuthor />} />
+        <Route path="view-user" element={<ListUser />} />
         <Route path="add-user" element={<AddUser />} />
         <Route path="update-user" element={<UpdateUser />} />
         <Route path="setting" element={<SettingPage />} />

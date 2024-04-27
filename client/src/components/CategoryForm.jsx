@@ -2,30 +2,35 @@ import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CategoryForm = () => {
+const CategoryForm = ({ isUpdate }) => {
+  let apiUrl = "http://localhost:3000/api/add-category";
   const { id } = useParams();
+  if (isUpdate) {
+    apiUrl = "http://localhost:3000/api/update-category/" + id;
+  }
+
+  const navigate = useNavigate();
 
   const [catInfo, setCatInfo] = useState({
     title: "",
     description: "",
     image: "",
     isActive: true,
-    totalBooks: 0,
-    addedBy: "0", // Assuming addedBy is a string property
   });
 
   useEffect(() => {
-    fatchCat();
-  }, []);
+    if (isUpdate) {
+      fatchCat();
+    }
+  }, [isUpdate]);
 
   const fatchCat = async () => {
     await axios
       .get(`http://localhost:3000/api/read-category/${id}`)
       .then((res) => {
-        console.log(res.data.response);
-        setCatInfo(res.data.response);
+        setCatInfo(res.data.response[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -50,20 +55,22 @@ const CategoryForm = () => {
     }
 
     axios
-      .post("http://localhost:3000/api/add-category", catInfo)
+      .post(apiUrl, catInfo)
       .then((res) => {
         if (res.data.status == "success") {
-          setCatInfo({
-            title: "",
-            description: "",
-            image: "",
-            isActive: true,
-            totalBooks: 0,
-            addedBy: 0,
-          });
-          toast.success(res.data.response, {
-            position: "top-center",
-          });
+          if (isUpdate) {
+            navigate("/view-category");
+          } else {
+            setCatInfo({
+              title: "",
+              description: "",
+              image: "",
+              isActive: true,
+            });
+            toast.success(res.data.response, {
+              position: "top-center",
+            });
+          }
         } else {
           toast.error(res.data.response, {
             position: "top-center",
@@ -94,18 +101,6 @@ const CategoryForm = () => {
           </div>
           <div className="col-md-4 col-sm-6 col-12 p-1">
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter description"
-                name="description"
-                value={catInfo.description}
-                onChange={inputChange}
-              />
-            </Form.Group>
-          </div>
-          <div className="col-md-4 col-sm-6 col-12 p-1">
-            <Form.Group controlId="formBasicEmail">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="text"
@@ -130,14 +125,16 @@ const CategoryForm = () => {
               </Form.Control>
             </Form.Group>
           </div>
+
           <div className="col-md-4 col-sm-6 col-12 p-1">
-            <Form.Group>
-              <Form.Label>Total Books</Form.Label>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Description</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter total books"
-                name="totalBooks"
-                value={catInfo.totalBooks}
+                as="textarea"
+                rows={4}
+                placeholder="Enter description"
+                name="description"
+                value={catInfo.description}
                 onChange={inputChange}
               />
             </Form.Group>

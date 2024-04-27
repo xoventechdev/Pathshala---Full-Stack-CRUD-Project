@@ -2,7 +2,7 @@ const CategoryModel = require("../model/CategoryModel");
 
 exports.AddCategories = async (req, res) => {
   try {
-    const { title, description, image } = req.body;
+    const { title, description, image, isActive } = req.body;
     if (title == null && description == null && image == null) {
       return res.json({
         status: "warning",
@@ -20,6 +20,7 @@ exports.AddCategories = async (req, res) => {
       title: title,
       description: description,
       image: image,
+      isActive: isActive,
     });
     await newCategory.save();
     res.json({
@@ -52,6 +53,7 @@ exports.ReadCategories = async (req, res) => {
 exports.ReadCategoriesBtIDs = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id);
     const categories = await CategoryModel.find({ _id: id });
     if (!categories.length > 0) {
       return res.json({
@@ -88,11 +90,7 @@ exports.UpdateCategories = async (req, res) => {
         response: `Category with ${id} does not exist`,
       });
     }
-    await CategoryModel.findByIdAndUpdate(id, {
-      title: title,
-      description: description,
-      image: image,
-    });
+    await CategoryModel.findByIdAndUpdate(id, req.body);
     res.json({
       status: "success",
       response: "Category updated successfully",
